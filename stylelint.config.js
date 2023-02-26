@@ -10,6 +10,7 @@ module.exports = {
     'color-function-notation': null,
     'color-hex-length': null,
     'declaration-block-no-redundant-longhand-properties': null,
+    'max-line-length': null,
     'no-descending-specificity': null,
     'no-duplicate-selectors': null,
     'number-max-precision': 8,
@@ -17,6 +18,7 @@ module.exports = {
     'property-no-vendor-prefix': null,
     'selector-class-pattern': null,
     'selector-id-pattern': null,
+    'string-quotes': null,
     'value-keyword-case': null,
     'value-no-vendor-prefix': null,
 

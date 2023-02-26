@@ -5,8 +5,7 @@ on:
       - 'dependabot/**'
     paths:
       - 'Gemfile*'
-      - '.rubocop*.yml'
-      - '.ruby-version'
+      - '.rubocop.yml'
       - '**/*.rb'
       - '**/*.rake'
       - '.github/workflows/lint-ruby.yml'
@@ -14,8 +13,7 @@ on:
   pull_request:
     paths:
       - 'Gemfile*'
-      - '.rubocop*.yml'
-      - '.ruby-version'
+      - '.rubocop.yml'
       - '**/*.rb'
       - '**/*.rake'
       - '.github/workflows/lint-ruby.yml'
@@ -23,22 +21,21 @@ on:
 jobs:
   lint:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Clone repository
+      - name: Checkout Code
         uses: actions/checkout@v3
-
-      - name: Install native Ruby dependencies
-        run: sudo apt-get install -y libicu-dev libidn11-dev
-
-      - name: Set up Ruby
-        uses: ruby/setup-ruby@v1
         with:
-          ruby-version: .ruby-version
-          bundler-cache: true
+          fetch-depth: 0
 
-      - name: Set-up RuboCop Problem Matcher
+      - name: Set-up RuboCop Problem Mathcher
         uses: r7kamura/rubocop-problem-matchers-action@v1
 
       - name: Run rubocop
-        run: bundle exec rubocop
+        uses: github/super-linter@v4
+        env:
+          DEFAULT_BRANCH: main
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          LINTER_RULES_PATH: .
+          RUBY_CONFIG_FILE: .rubocop.yml
+          VALIDATE_ALL_CODEBASE: false
+          VALIDATE_RUBY: true

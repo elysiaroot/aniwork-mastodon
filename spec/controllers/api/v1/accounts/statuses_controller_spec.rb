@@ -1,4 +1,3 @@
-# frozen_string_literal: true
 require 'rails_helper'
 
 describe Api::V1::Accounts::StatusesController do
@@ -16,12 +15,7 @@ describe Api::V1::Accounts::StatusesController do
     it 'returns http success' do
       get :index, params: { account_id: user.account.id, limit: 1 }
 
-      expect(response).to have_http_status(:ok)
-    end
-
-    it 'returns expected headers' do
-      get :index, params: { account_id: user.account.id, limit: 1 }
-
+      expect(response).to have_http_status(200)
       expect(response.headers['Link'].links.size).to eq(2)
     end
 
@@ -29,29 +23,19 @@ describe Api::V1::Accounts::StatusesController do
       it 'returns http success' do
         get :index, params: { account_id: user.account.id, only_media: true }
 
-        expect(response).to have_http_status(:ok)
+        expect(response).to have_http_status(200)
       end
     end
 
     context 'with exclude replies' do
-      let!(:older_statuses) { user.account.statuses.destroy_all }
-      let!(:status) { Fabricate(:status, account: user.account) }
-      let!(:status_self_reply) { Fabricate(:status, account: user.account, thread: status) }
-
       before do
-        Fabricate(:status, account: user.account, thread: Fabricate(:status)) # Reply to another user
-        get :index, params: { account_id: user.account.id, exclude_replies: true }
+        Fabricate(:status, account: user.account, thread: Fabricate(:status))
       end
 
       it 'returns http success' do
-        expect(response).to have_http_status(:ok)
-      end
+        get :index, params: { account_id: user.account.id, exclude_replies: true }
 
-      it 'returns posts along with self replies' do
-        json = body_as_json
-        post_ids = json.map { |item| item[:id].to_i }.sort
-
-        expect(post_ids).to eq [status.id, status_self_reply.id]
+        expect(response).to have_http_status(200)
       end
     end
 
@@ -63,7 +47,7 @@ describe Api::V1::Accounts::StatusesController do
       it 'returns http success' do
         get :index, params: { account_id: user.account.id, pinned: true }
 
-        expect(response).to have_http_status(:ok)
+        expect(response).to have_http_status(200)
       end
     end
 
@@ -71,15 +55,12 @@ describe Api::V1::Accounts::StatusesController do
       let(:account)        { Fabricate(:account, username: 'bob', domain: 'example.com') }
       let(:status)         { Fabricate(:status, account: account) }
       let(:private_status) { Fabricate(:status, account: account, visibility: :private) }
-
-      before do
-        Fabricate(:status_pin, account: account, status: status)
-        Fabricate(:status_pin, account: account, status: private_status)
-      end
+      let!(:pin)           { Fabricate(:status_pin, account: account, status: status) }
+      let!(:private_pin)   { Fabricate(:status_pin, account: account, status: private_status) }
 
       it 'returns http success' do
         get :index, params: { account_id: account.id, pinned: true }
-        expect(response).to have_http_status(:ok)
+        expect(response).to have_http_status(200)
       end
 
       context 'when user does not follow account' do

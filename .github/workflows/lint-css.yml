@@ -6,7 +6,6 @@ on:
     paths:
       - 'package.json'
       - 'yarn.lock'
-      - '.nvmrc'
       - '.prettier*'
       - 'stylelint.config.js'
       - '**/*.css'
@@ -18,7 +17,6 @@ on:
     paths:
       - 'package.json'
       - 'yarn.lock'
-      - '.nvmrc'
       - '.prettier*'
       - 'stylelint.config.js'
       - '**/*.css'
@@ -38,7 +36,6 @@ jobs:
         uses: actions/setup-node@v3
         with:
           cache: yarn
-          node-version-file: '.nvmrc'
 
       - name: Install all yarn packages
         run: yarn --frozen-lockfile

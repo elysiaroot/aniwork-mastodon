@@ -1225,7 +1225,7 @@ nl:
     types:
       blocking: Blokkeerlijst
       bookmarks: Bladwijzers
-      domain_blocking: Lijst met geblokkeerde domeinen
+      domain_blocking: Lijst met genegeerde servers
       following: Volglijst
       muting: Negeerlijst
     upload: Uploaden
