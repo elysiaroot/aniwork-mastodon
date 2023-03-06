@@ -1,0 +1,42 @@
+a.avatar{position:relative !important;}
+a.avatar.verified-aniwork:after{
+  background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 100%);
+  content: '\f00c Verified';
+  color: #fff;
+  position: absolute;
+  text-align: center;
+  line-height: 53px;
+  font-size: 11px;
+  width: 94px;
+  height: 47px;
+  bottom: 0px;
+/* margin-top: 23px; */
+  border-radius: 0px 0px 1000px 1000px;
+  right: 0px;
+/* padding: 0px 8px; */
+  font-family: 'FontAwesome';
+  z-index:999999;
+}
+
+@keyframes avatar_moving{
+  0%{ transform:rotate(-20deg) }
+  50%{ transform:rotate(20deg) }
+  100%{ transform:rotate(-20deg) }
+}
+
+.avatar .account__avatar{z-index:0;}
+.avatar .account__avatar img{z-index:0;animation-name:avatar_moving;animation-duration: 2s;animation-iteration-count: infinite;}
+
+/* ***************************************************************************** */
+
+.account__header__bar .avatar .account__avatar, .account__avatar, .account__avatar-overlay-base, .account__avatar-overlay-overlay{border-radius:100% !important; overflow:hidden !important;}
+
+.status__wrapper.status__wrapper-public.focusable[aria-label*='부스트 했습니다'] > div.status__prepend span:after,
+.notification.notification-favourite.focusable[aria-label*='니다'] .notification__message span[title] span:after,
+.notification.notification-reblog.focusable[aria-label*='니다'] .notification__message span[title] span:after,
+.notification.notification-poll.focusable[aria-label*='니다'] .notification__message span[title] span:after,
+.notification.notification-follow.focusable[aria-label*='니다'] .notification__message span[title] span:after,
+.notification.notification-admin-sign-up.focusable[aria-label*='니다'] .notification__message span[title] span:after{content: '냥'}
+
+/* ***************************************************************************** */
+

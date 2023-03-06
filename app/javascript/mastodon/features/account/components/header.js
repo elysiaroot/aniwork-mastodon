@@ -17,6 +17,7 @@ import AccountNoteContainer from '../containers/account_note_container';
 import FollowRequestNoteContainer from '../containers/follow_request_note_container';
 import { PERMISSION_MANAGE_USERS, PERMISSION_MANAGE_FEDERATION } from 'mastodon/permissions';
 import { Helmet } from 'react-helmet';
+import "styles/verified.scss"; // HanbitGaram (+add verified)
 
 const messages = defineMessages({
   unfollow: { id: 'account.unfollow', defaultMessage: 'Unfollow' },
@@ -318,6 +319,19 @@ class Header extends ImmutablePureComponent {
       badge = null;
     }
 
+    // HanbitGaram (+add verified)
+    let verifiedMark = null;
+    let verifiedRolesName = null;
+    let verifiedRolesId = null;
+    if(isLocal){
+      let rolesList = account.get('roles');
+      rolesList.map((roleContent) => {
+        verifiedRolesName = roleContent.get('name');
+        verifiedRolesId = roleContent.get('id');
+        verifiedMark = true;
+      });
+    }
+
     return (
       <div className={classNames('account__header', { inactive: !!account.get('moved') })} onMouseEnter={this.handleMouseEnter} onMouseLeave={this.handleMouseLeave}>
         {!(suspended || hidden || account.get('moved')) && account.getIn(['relationship', 'requested_by']) && <FollowRequestNoteContainer account={account} />}
@@ -332,7 +346,7 @@ class Header extends ImmutablePureComponent {
 
         <div className='account__header__bar'>
           <div className='account__header__tabs'>
-            <a className='avatar' href={account.get('avatar')} rel='noopener noreferrer' target='_blank' onClick={this.handleAvatarClick}>
+            <a className={`avatar ${verifiedMark===true?`verified-aniwork roles-${verifiedRolesId}`:''}`} href={account.get('avatar')} rel='noopener noreferrer' target='_blank' onClick={this.handleAvatarClick}>
               <Avatar account={suspended || hidden ? undefined : account} size={90} />
             </a>
 
