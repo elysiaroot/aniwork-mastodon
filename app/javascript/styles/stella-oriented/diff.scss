@@ -1,0 +1,160 @@
+body {
+	font-family: 'HBIOS-SYS', 'mastodon-font-sans-serif', sans-serif;
+}
+
+.column-link {
+  background: $ui-base-color;
+  color: $primary-text-color;
+  font-family: 'HBIOS-SYS', sans-serif;
+
+  &:hover,
+  &:focus,
+  &:active {
+    background: lighten($ui-base-color, 11%);
+  }
+
+  &--transparent {
+    background: transparent;
+    color: lighten($ui-primary-color, 3%);
+
+    &:hover {
+	    background: transparent;
+	    color: $ui-base-lighter-color;
+    }
+
+    &:focus{
+      background: transparent;
+      color: $primary-text-color;
+    }
+
+    &:active {
+	    color: $classic-highlight-color;
+    }
+
+    &.active {
+      color: $classic-highlight-color;
+    }
+  }
+
+  &--logo {
+    background: transparent;
+    padding: 10px;
+
+    &:hover,
+    &:focus,
+    &:active {
+      background: transparent;
+    }
+  }
+}
+
+a.mention,
+a.status-link,
+strong.navigation-bar__profile-account {
+	color: #df99f7;
+}
+
+.emoji-mart {
+	color: $primary-text-color;
+}
+
+.compose-form{
+	.spoiler-input__input,
+	.autosuggest-textarea__textarea {
+		color: $primary-text-color;
+	}
+}
+
+.icon-with-badge {
+	&__badge {
+		background: $classic-highlight-color;
+	}
+}
+
+.filters-list,
+.announcements-list{
+	&__item{
+		&__title{
+			color: $primary-text-color;
+		}
+	}
+}
+
+.permissions-list__item__text__title{
+	color: $classic-highlight-color;
+}
+
+.log-entry{
+	font-size: 15px;
+	&__title{
+		.username{
+			color: $classic-highlight-color;
+		}
+
+		a{
+			color: #df99f7;
+		}
+	}
+}
+
+.flash-message{
+	&.notice{
+		border: 1px solid rgba($ui-base-lighter-color, 0.25);
+		background: lighten($ui-base-lighter-color, 15%);
+		color: $ui-base-lighter-color; // #df99f7;
+		font-size: 14px;
+	}
+}
+
+.notification__filter_bar{
+	button.active {
+		color: $ui-highlight-color;
+	}
+}
+
+.status__content .emojione {
+    --emoji-size: 1.5em;
+    width: var(--emoji-size, 36px) !important;
+    height: var(--emoji-size, 36px) !important;
+    font-size: var(--emoji-size, 36px) !important;
+    transition: transform .2s ease;
+    
+    &:hover {
+        transform: scale(1.2);
+    }
+}
+
+.compose-form .compose-form__buttons-wrapper {
+	background: darken($simple-background-color, 2%);
+}
+
+.privacy-dropdown__dropdown {
+	background: #c9b3ff !important;
+}
+
+.reply-indicator{
+	background: #ab8aff !important;
+}
+
+.confirmational-modal, .confirmation-modal__container, .block-modal, .block-modal__container {
+	color: #8b9cb4;
+}
+
+.block-modal__action-bar{
+	background: #ab8aff;
+}
+
+.poll__option input[type="text"], section.emoji-mart-search > input, .confirmation-modal__cancel-button{
+	color: #ab8aff;
+}
+
+//button gradient
+.button{
+	&.button--block{
+		background: linear-gradient(90deg, $classic-highlight-color, $ui-base-lighter-color);
+		color: #ccc;
+	}
+	&.button-tertiary, &.button-secondary{
+		border: none;
+	}
+}
