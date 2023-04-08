@@ -13,11 +13,11 @@ module Mastodon
     end
 
     def patch
-      1
+      2
     end
 
     def flags
-      ''
+      '+aniwork'
     end
 
     def suffix
@@ -33,7 +33,7 @@ module Mastodon
     end
 
     def repository
-      ENV.fetch('GITHUB_REPOSITORY', 'mastodon/mastodon')
+      ENV.fetch('GITHUB_REPOSITORY', 'elysiaroot/aniwork-mastodon')
     end
 
     def source_base_url
