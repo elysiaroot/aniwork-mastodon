@@ -4046,3 +4046,13 @@ body.embed .entry .detailed-status {
  * Star animation micro-interactions end
  * -------------------------------------
  */
+
+.account__header__bar .avatar{width:100% !important;}
+a.avatar.verified-aniwork::after{
+  width:100% !important;
+  border-radius:0px;
+  background: linear-gradient(180deg,transparent,#1e2028) !important;
+}
+.compose-panel .compose-form{
+  margin:0px;
+}
