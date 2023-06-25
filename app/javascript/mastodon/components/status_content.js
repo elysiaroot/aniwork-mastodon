@@ -231,6 +231,17 @@ class StatusContent extends React.PureComponent {
       'status__content--collapsed': renderReadMore,
     });
 
+    const SuicideAlert = () => {
+      return (content.__html.includes('자살')) ? (<div className="about__meta" style={{border:'1px solid #1f232b', marginTop:'5px', backgroundColor:'#1f232b'}}>
+        <div className="about__meta__column">
+          자살을 고민하고 계신가요?<br />
+          자살예방상담전화 : 1393<br />
+          생명의 전화 : 1588-9191<br />
+          정신건강 상담전화 : 1577-0199
+        </div>
+      </div>) : '';
+    };
+
     const readMoreButton = renderReadMore && (
       <button className='status__content__read-more-button' onClick={this.props.onClick} key='read-more'>
         <FormattedMessage id='status.read_more' defaultMessage='Read more' /><Icon id='angle-right' fixedWidth />
@@ -261,20 +272,23 @@ class StatusContent extends React.PureComponent {
       }
 
       return (
-        <div className={classNames} ref={this.setRef} tabIndex='0' onMouseDown={this.handleMouseDown} onMouseUp={this.handleMouseUp} onMouseEnter={this.handleMouseEnter} onMouseLeave={this.handleMouseLeave}>
-          <p style={{ marginBottom: hidden && status.get('mentions').isEmpty() ? '0px' : null }}>
-            <span dangerouslySetInnerHTML={spoilerContent} className='translate' lang={lang} />
-            {' '}
-            <button type='button' className={`status__content__spoiler-link ${hidden ? 'status__content__spoiler-link--show-more' : 'status__content__spoiler-link--show-less'}`} onClick={this.handleSpoilerClick} aria-expanded={!hidden}>{toggleText}</button>
-          </p>
+        <>
+          <div className={classNames} ref={this.setRef} tabIndex='0' onMouseDown={this.handleMouseDown} onMouseUp={this.handleMouseUp} onMouseEnter={this.handleMouseEnter} onMouseLeave={this.handleMouseLeave}>
+            <p style={{ marginBottom: hidden && status.get('mentions').isEmpty() ? '0px' : null }}>
+              <span dangerouslySetInnerHTML={spoilerContent} className='translate' lang={lang} />
+              {' '}
+              <button type='button' className={`status__content__spoiler-link ${hidden ? 'status__content__spoiler-link--show-more' : 'status__content__spoiler-link--show-less'}`} onClick={this.handleSpoilerClick} aria-expanded={!hidden}>{toggleText}</button>
+            </p>
 
-          {mentionsPlaceholder}
+            {mentionsPlaceholder}
 
-          <div tabIndex={!hidden ? 0 : null} className={`status__content__text ${!hidden ? 'status__content__text--visible' : ''} translate`} lang={lang} dangerouslySetInnerHTML={content} />
+            <div tabIndex={!hidden ? 0 : null} className={`status__content__text ${!hidden ? 'status__content__text--visible' : ''} translate`} lang={lang} dangerouslySetInnerHTML={content} />
 
-          {!hidden && poll}
-          {!hidden && translateButton}
-        </div>
+            {!hidden && poll}
+            {!hidden && translateButton}
+          </div>
+          <SuicideAlert />
+        </>
       );
     } else if (this.props.onClick) {
       return (
@@ -285,18 +299,21 @@ class StatusContent extends React.PureComponent {
             {poll}
             {translateButton}
           </div>
-
+          <SuicideAlert />
           {readMoreButton}
         </>
       );
     } else {
       return (
-        <div className={classNames} ref={this.setRef} tabIndex='0' onMouseEnter={this.handleMouseEnter} onMouseLeave={this.handleMouseLeave}>
-          <div className='status__content__text status__content__text--visible translate' lang={lang} dangerouslySetInnerHTML={content} />
+        <>
+          <div className={classNames} ref={this.setRef} tabIndex='0' onMouseEnter={this.handleMouseEnter} onMouseLeave={this.handleMouseLeave}>
+            <div className='status__content__text status__content__text--visible translate' lang={lang} dangerouslySetInnerHTML={content} />
 
-          {poll}
-          {translateButton}
-        </div>
+            {poll}
+            {translateButton}
+          </div>
+          <SuicideAlert />
+        </>
       );
     }
   }
