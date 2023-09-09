@@ -74,6 +74,7 @@ services:
       # - es
     volumes:
       - ./public/system:/mastodon/public/system
+      - ./public/packs:/mastodon/public/packs
 
   streaming:
     build: .
